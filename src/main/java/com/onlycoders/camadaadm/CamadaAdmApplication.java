@@ -11,17 +11,7 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class CamadaAdmApplication {
 
-	@Bean
-	public CommandLineRunner commandLineRunner(@Autowired UsuarioRepository repository){
-		return args -> {
-			Usuario usuario = new Usuario();
-			usuario.setNome("Fulano do banco");
-			usuario.setEmail("fulanodobanco@email.com");
-			usuario.setLogin("fulano");
-			usuario.setSenha("456");
-			repository.save(usuario);
-		};
-	}
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(CamadaAdmApplication.class, args);
