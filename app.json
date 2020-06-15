@@ -1,0 +1,7 @@
+
+{
+    "name": "AluGo camada admin",
+    "description": "descrição",
+    "image": "heroku/java",
+    "addons": [ "heroku-postgresql" ]
+  }
