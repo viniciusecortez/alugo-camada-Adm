@@ -41,14 +41,13 @@ public class UsuarioController {
         return repository.findAll();
     }
 
-    @PatchMapping("{id}/muda-senha")
-    public void MudaSenha( @PathVariable Integer Id, @RequestBody String senha){
+    @PatchMapping("{id}/muda-nome")
+    public void MudaSenha( @PathVariable Integer Id, @RequestBody String nome){
         Optional<Usuario> usuario = repository.findById(Id);
         usuario.ifPresent( c -> {
-            c.setSenha(senha);
+            c.setNome(nome);
             repository.save(c);
         });
-
     }
 
 }

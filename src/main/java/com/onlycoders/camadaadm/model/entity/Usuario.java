@@ -12,8 +12,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Date;
 
-
+/*o @Entity diz que esta classe é uma entidade*/
+/*o @Getter e @Setter gera automaticamente os métodos básicos em tempo de execução*/
+/*o @NoArgsConstructor diz que o método construtor não possui parâmetros*/
 @Entity
 @Getter@Setter
 @NoArgsConstructor
@@ -28,11 +31,22 @@ public class Usuario {
     private String nome;
 
     @Column
+    private String cpf;
+
+    @Column
+    private String logradouro;
+
+    @Column
+    private String numero;
+
+    @Column
+    private String cep;
+
+    @Column
     private String email;
 
-    @Column
-    private String login;
 
     @Column
-    private String senha;
+    private Date data_nascimento;
+
 }
