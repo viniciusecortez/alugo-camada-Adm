@@ -1,0 +1,31 @@
+dist: ubuntu
+language: java
+jdk:
+  - openjdk8
+services:
+  - postgresql
+addons:
+  postgresql: "11.2"
+
+before_install:
+  - sudo apt-get update
+  - sudo apt-get --yes remove postgresql\*
+  - sudo apt-get install -y postgresql-11 postgresql-client-11
+  - sudo cp /etc/postgresql/{9.6,11}/main/pg_hba.conf
+  - sudo service postgresql restart 11
+
+before_script:
+  - psql --version
+  - psql -c 'create database aluGO;' -U postgres
+script:
+  - ./mvnw clean test
+
+after_script:
+  - "./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT"
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: f3937ce7-e942-42b5-8923-409709ece5ff
+  app:
+    master: adm-c-test
