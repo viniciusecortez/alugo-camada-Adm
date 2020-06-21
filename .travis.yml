@@ -1,31 +1,16 @@
 dist: ubuntu
 language: java
 jdk:
-  - openjdk8
-services:
-  - postgresql
-addons:
-  postgresql: "11.2"
-
-before_install:
-  - sudo apt-get update
-  - sudo apt-get --yes remove postgresql\*
-  - sudo apt-get install -y postgresql-11 postgresql-client-11
-  - sudo cp /etc/postgresql/{9.6,11}/main/pg_hba.conf
-  - sudo service postgresql restart 11
-
-before_script:
-  - psql --version
-  - psql -c 'create database aluGO;' -U postgres
+- openjdk8
 script:
-  - ./mvnw clean test
-
+- "./mvnw clean test -P test"
 after_script:
-  - "./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT"
-
+- "./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT"
 deploy:
   provider: heroku
   api_key:
-    secure: f3937ce7-e942-42b5-8923-409709ece5ff
+    secure: GjRmtpNw8BvfgqhrPi1GyumJZOeznC4STRu8JsUBqD9s23tedZQxE51FbIIe2uEGCfNl7JEZCtX4eoIFyjisfru2uedc+ItDguD7gsouP8oIfKZHWgXCr1gBB42F9Ml4w3ANM9AMuwD7OtypITXzU76mTspmpIbjC5FIxOMb/b496y41/gHE0qPEE8T30TPNFyFlWsolcd0ndmWeoFNG2KdSe2kHs1PvGFWBEttJZsNCZCokgRLyTlntjloYD0m2wglO2HH0q3YCWsfvpvwCsW9P22QbRtUTp+l6P89d//7auC+Jvc+f8HJkZT1Zihnlzx0TN87hV9ddMdLnotesmf1TCTCkHHn+IrQPH2FBu+B7gRkXmtTlbttHsy3Ua27Ftkug4xUf2pdZDfyReL7wlSLqTEXuBB6Vm8ZOiWfDaAvzqe7NFaFqMCY7IREp5jvNVsDhFNNXZzC8Xafaay5ykMArQv7OMsWMCfi4kwJUYkdY6c1D4+lzEjxufK34aqa7N6TnzRrxkuM3lpZg+kOn1E7CSTyf9UD+/jSbqQb57Bx0E17R75/KGANm8TWzjVdLOE1UI3XiVkv4z4wSMorG1asFQZfeTOSlF23HOgi1ehqfdr8orVKFuQu27ZePgz90ayMqErWJlbFGuvYGHZCAEqQsy2x8GwEi4gNrlzNsw10=
   app:
     master: adm-c-test
+  on:
+    repo: viniciusecortez/alugo-camada-Adm
